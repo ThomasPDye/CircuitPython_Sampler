@@ -13,7 +13,7 @@ requires = [
 [project]
 name = "circuitpython-sampler"
 description = "A CircuitPython Library to help with sampling and averagin"
-version = "0.0.0+auto.0"
+version = "0.0.1+auto.0"
 readme = "README.rst"
 authors = [
     {name = "Thomas Dye", email = "tompdye@googlemail.com"}
