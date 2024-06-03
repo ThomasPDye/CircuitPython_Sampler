@@ -22,7 +22,7 @@ Introduction
     :target: https://github.com/psf/black
     :alt: Code Style: Black
 
-A CircuitPython Library to help with sampling and averagin
+A CircuitPython Library to help with sampling and averaging
 
 
 Dependencies
