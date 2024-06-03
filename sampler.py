@@ -73,7 +73,6 @@ class VoltageSampler(Sampler):
     """class for sampling optionally scaled voltages using on board analog inputs
     :param ~analogio.AnalogIn ain: The analog input to get data from
     :param float ratio: value to multiply ain voltage by
-                        (e.g. the divider ratio of an external resistive potential divider)
     :param int max_samples: the maximum number of samples to store
     """
 
