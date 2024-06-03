@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: MIT
 
 Adafruit-Blinka
-circuitpython-build-tools
+circuitpython-analogio
