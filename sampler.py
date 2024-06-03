@@ -21,22 +21,25 @@ Implementation Notes
 """
 
 # imports
+from analogio import AnalogIn
 
 __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/ThomasPDye/CircuitPython_Sampler.git"
 
+
 class Sampler:
     """Base class for a Sampler
 
-        :param int max_samples: the maximum number of samples to store (before discarding the oldest samples, one at a time)
+    :param int max_samples: the maximum number of samples to store
+                            (before discarding the oldest samples, one at a time)
     """
+
     def __init__(self, max_samples: int = 256):
         self.__max_samples = max_samples
         self.__samples = []
 
-    def __get(self):
+    def get(self):
         """get value function, requires redefinition in subclasses"""
-        pass
 
     def len(self):
         """return number of samples currently stored"""
@@ -46,7 +49,7 @@ class Sampler:
         """update the array of samples"""
         while self.len() >= self.__max_samples:
             self.__samples.pop(0)
-        self.__samples.append(self.__get())
+        self.__samples.append(self.get())
 
     def average(self, lastn: int = 128):
         """return average of the lastn samples"""
@@ -54,10 +57,10 @@ class Sampler:
             self.update()
         length = self.len()
         startn = 0
-        if 0 < lastn and lastn <= length:
+        if 0 < lastn <= length:
             startn = length - lastn
         sample_sum = 0.0
-        for n in range(startn,length):
+        for n in range(startn, length):
             sample_sum += self.__samples[n]
         return sample_sum / (length - startn)
 
@@ -65,19 +68,20 @@ class Sampler:
         """clear the list of stored samples"""
         self.__samples.clear()
 
-from analogio import AnalogIn
 
 class VoltageSampler(Sampler):
     """class for sampling optionally scaled voltages using on board analog inputs
-        :param ~analogio.AnalogIn ain: The analog input to get data from
-        :param float ratio: value to multiply ain voltage by (e.g. the divider ratio of an external resistive potential divider)
-        :param int max_samples: the maximum number of samples to store
+    :param ~analogio.AnalogIn ain: The analog input to get data from
+    :param float ratio: value to multiply ain voltage by
+                        (e.g. the divider ratio of an external resistive potential divider)
+    :param int max_samples: the maximum number of samples to store
     """
-    def __init__(self, ain: AnalogIn, ratio: float = 1.0, max_samples:int = 1024):
+
+    def __init__(self, ain: AnalogIn, ratio: float = 1.0, max_samples: int = 1024):
         super().__init__(max_samples)
         self.__ain = ain
         self.__ratio = ratio
 
-    def __get(self):
-        """get and scale the voltage on the analog input using instantiated parameters ain and ratio"""
+    def get(self):
+        """get and scale the voltage on the analog input using instantiated parameters"""
         return self.__ratio * (self.__ain.value * self.__ain.reference_voltage) / 65536
