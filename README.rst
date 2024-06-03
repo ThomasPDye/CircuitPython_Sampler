@@ -93,9 +93,6 @@ Or the following command to update an existing version:
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the
-examples folder and be included in docs/examples.rst.
-
 Documentation
 =============
 API documentation for this library can be found on `Read the Docs <https://circuitpython-sampler.readthedocs.io/>`_.
