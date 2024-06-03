@@ -12,7 +12,6 @@ from sampler import VoltageSampler
 sample_period = 0.1  # minimum time between samples
 print_period = 10  # minimum time between prints
 sleep_period = 0.01  # target time to sleep between time comparisons
-# (approximately equivalent to timing precision)
 
 num_samples = ceil(print_period / sample_period)
 
