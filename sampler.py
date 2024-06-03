@@ -21,7 +21,7 @@ Implementation Notes
 """
 
 # imports
-from analogio import AnalogIn
+import analogio
 
 __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/ThomasPDye/CircuitPython_Sampler.git"
@@ -77,7 +77,9 @@ class VoltageSampler(Sampler):
     :param int max_samples: the maximum number of samples to store
     """
 
-    def __init__(self, ain: AnalogIn, ratio: float = 1.0, max_samples: int = 1024):
+    def __init__(
+        self, ain: analogio.AnalogIn, ratio: float = 1.0, max_samples: int = 1024
+    ):
         super().__init__(max_samples)
         self.__ain = ain
         self.__ratio = ratio
